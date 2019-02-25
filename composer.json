@@ -1,0 +1,40 @@
+{
+    "name": "mmikkel/duplicate-file",
+    "description": "Adds a Duplicate File element action",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "duplicate file"
+    ],
+    "support": {
+        "docs": "https://github.com/mmikkel/Craft-DuplicateFile/blob/master/README.md",
+        "issues": "https://github.com/mmikkel/Craft-DuplicateFile/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mats Mikkel Rummelhoff",
+            "homepage": "https://vaersaagod.no"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "mmikkel\\duplicatefile\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Duplicate File",
+        "handle": "duplicate-file",
+        "hasCpSettings": false,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/mmikkel/Craft-DuplicateFile/master/CHANGELOG.md",
+        "class": "mmikkel\\duplicatefile\\DuplicateFile"
+    }
+}
