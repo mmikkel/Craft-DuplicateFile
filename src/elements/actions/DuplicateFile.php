@@ -83,8 +83,7 @@ class DuplicateFile extends ElementAction
                 $folder = $asset->getFolder();
                 $asset->setScenario(Asset::SCENARIO_CREATE);
 
-                /* @var Asset $duplicate */
-                $duplicate = $elementsService->duplicateElement($asset, [
+                $elementsService->duplicateElement($asset, [
                     'title' => Craft::t('app', '{title} copy', ['title' => $asset->title]),
                     'tempFilePath' => $imageCopy,
                     'filename' => $assetsService->getNameReplacementInFolder($asset->filename, $folder->id),

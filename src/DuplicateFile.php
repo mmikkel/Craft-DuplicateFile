@@ -94,18 +94,24 @@ class DuplicateFile extends Plugin
 
         Event::on(Asset::class, Element::EVENT_REGISTER_ACTIONS, function (RegisterElementActionsEvent $event) {
             $source = $event->source;
-            $folder = null;
-            $folderIdOrUid = \explode(':', $source)[1] ?? null;
-            if (StringHelper::isUUID($folderIdOrUid)) {
-                $folder = Craft::$app->getAssets()->getFolderByUid($folderIdOrUid);
-            } else if ((int)$folderIdOrUid) {
-                $folder = Craft::$app->getAssets()->getFolderById($folderIdOrUid);
+
+            if (!\preg_match('/^folder:([a-z0-9\-]+)/', $source, $matches)) {
+                return;
             }
+
+            $folderUid = $matches[1] ?? null;
+            if (!StringHelper::isUUID($folderUid)) {
+                return;
+            }
+
+            $folder = Craft::$app->getAssets()->getFolderByUid($folderUid);
             if (!$folder) {
                 return;
             }
+
+            /** @var Volume $volume */
             $volume = $folder->getVolume();
-            $permission = 'saveAssetInVolume: ' . (StringHelper::isUUID($folderIdOrUid) ? $volume->uid : $volume->id);
+            $permission = "saveAssetInVolume:{$volume->uid}";
             if (!Craft::$app->getUser()->checkPermission($permission)) {
                 return;
             }
